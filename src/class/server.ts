@@ -8,6 +8,9 @@ export default class Server {
   constructor() {
     this.app = express();
     this.app.set('port', process.env.PORT || SERVER_PORT);
+    this.app.get('/', function (req, res) {
+      res.json({ message: 'Bakat.id API v0.3.3' });
+    });
   }
 
   listen(callback: Function) {

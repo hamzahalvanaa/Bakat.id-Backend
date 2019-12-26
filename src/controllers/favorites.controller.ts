@@ -17,7 +17,7 @@ FAVORITES_CTRL.getFavoritesByUser = async (req: Request, res: Response) => {
     if (err) {
       return res.status(500).json({
         ok: false,
-        message: "Error loading Favorites",
+        message: "Error loading Favorites!",
         err
       });
     }

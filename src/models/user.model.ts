@@ -22,7 +22,7 @@ const UserSchema = new Schema({
 
 UserSchema.plugin(validator, { message: '{PATH} must be unique' });
 
-UserSchema.methods.toJSON = function() {
+UserSchema.methods.toJSON = function () {
   let obj = this.toObject();
   delete obj.password;
   return obj;

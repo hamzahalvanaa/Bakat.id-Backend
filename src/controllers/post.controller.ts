@@ -93,22 +93,22 @@ POST_CTRL.getTotalLikes = async (req: Request, res: Response) => {
   const user = req.user;
 
   const posts = await Post.find({ user: user._id },
-                                { likes: 1, _id: 0 }, (err, posts) => {
-    if (err) {
-      return res.status(500).json({
-        ok: false,
-        message: 'Error loading Posts',
-        err
-      });
-    }
+    { likes: 1, _id: 0 }, (err, posts) => {
+      if (err) {
+        return res.status(500).json({
+          ok: false,
+          message: 'Error loading Posts',
+          err
+        });
+      }
 
-    if (!posts) {
-      return res.status(400).json({
-        ok: false,
-        message: "User with Id " + user._id + " doesn't have Post",
-      });
-    }
-  });
+      if (!posts) {
+        return res.status(400).json({
+          ok: false,
+          message: "User with Id " + user._id + " doesn't have Post",
+        });
+      }
+    });
 
   res.status(200).json({
     ok: true,
@@ -185,7 +185,7 @@ function deletePost(id: string) {
 
 function deleteFavoritesByPost(id: string) {
   return new Promise((res, rej) => {
-    Favorite.findOneAndDelete({post: id}, (err, favorite) => {
+    Favorite.findOneAndDelete({ post: id }, (err, favorite) => {
       if (err) { rej('Error Finding Favorite by Post'); }
       if (!favorite) { res("This Post wasn\'t on Favorites"); }
       res(favorite);
@@ -195,7 +195,7 @@ function deleteFavoritesByPost(id: string) {
 
 function deleteLikesByPost(id: string) {
   return new Promise((res, rej) => {
-    Like.findOneAndDelete({post: id}, (err, like) => {
+    Like.findOneAndDelete({ post: id }, (err, like) => {
       if (err) { rej('Error Finding Like by Post'); }
       if (!like) { res("This Post wasn\'t liked"); }
       res(like);
